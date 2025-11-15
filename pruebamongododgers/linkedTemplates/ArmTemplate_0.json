@@ -79,6 +79,62 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Json2pool')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorageXX",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "pool.json",
+						"folderPath": "mongo_in",
+						"fileSystem": "preliminarcontainer"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"_id": {
+							"type": "object",
+							"properties": {
+								"$oid": {
+									"type": "string"
+								}
+							}
+						},
+						"PID": {
+							"type": "object",
+							"properties": {
+								"$numberLong": {
+									"type": "string"
+								}
+							}
+						},
+						"Pool Area": {
+							"type": "object",
+							"properties": {
+								"$numberLong": {
+									"type": "string"
+								}
+							}
+						},
+						"Pool QC": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorageXX')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Jsonbsmt')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -227,7 +283,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "Jsonbsmt",
+								"referenceName": "Json2pool",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -241,7 +297,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/MongoDbAtlasCollection4')]",
-				"[concat(variables('factoryId'), '/datasets/Jsonbsmt')]"
+				"[concat(variables('factoryId'), '/datasets/Json2pool')]"
 			]
 		}
 	]
