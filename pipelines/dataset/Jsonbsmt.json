@@ -1,0 +1,20 @@
+{
+	"name": "Jsonbsmt",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorageXX",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "bsmt.json",
+				"folderPath": "mongo_in",
+				"fileSystem": "preliminarcontainer"
+			}
+		},
+		"schema": {}
+	}
+}
