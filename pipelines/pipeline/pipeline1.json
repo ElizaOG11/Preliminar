@@ -39,7 +39,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "Jsonbsmt",
+						"referenceName": "Json2pool",
 						"type": "DatasetReference"
 					}
 				]
